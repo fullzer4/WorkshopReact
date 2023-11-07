@@ -11,21 +11,33 @@ const Counter: FC<CounterProps> = memo(({ count }) => {
   return <h2>Contador: {count}</h2>;
 });
 
+const CounterPortal = (count: number, portal: any) => {
+  return ReactDOM.createPortal(
+    <Counter count={count} />, portal
+  )
+}
+
 const Home = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((prevCount) => prevCount + 1);
-    }, 10);
+    }, 1);
 
     return () => clearInterval(interval);
   }, []);
 
+  const portal: HTMLElement | null = document.getElementById("root");
+
+  if (!portal) {
+    return null;
+  }
+
   return (
     <main>
       <h1>Foi</h1>
-      {ReactDOM.createPortal(<Counter count={count} />, document.body)}
+      {CounterPortal(count, portal)}
     </main>
   );
 };
