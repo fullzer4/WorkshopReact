@@ -1,6 +1,4 @@
-"use client"
-
-import React, { useState, memo, useEffect, FC } from 'react';
+import { useState, memo, useEffect, FC } from 'react';
 import ReactDOM from 'react-dom';
 
 interface CounterProps {
@@ -11,7 +9,7 @@ const Counter: FC<CounterProps> = memo(({ count }) => {
   return <h2>Contador: {count}</h2>;
 });
 
-const CounterPortal = (count: number, portal: any) => {
+const CounterPortal: FC<any> = (count: number, portal: any) => {
   return ReactDOM.createPortal(
     <Counter count={count} />, portal
   )
